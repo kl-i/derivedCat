@@ -1,0 +1,615 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\addbibresource{mybib.bib}
+
+\begin{document}
+
+\title{Derived categories of quasi-coherent sheaves}
+
+\author{Ken Lee}
+\date{March 2025}
+\maketitle
+
+This is an exposition to
+define the unbounded derived stable $\infty$-category of quasi-coherent sheaves
+on a scheme using stable $\infty$-categories and
+prove that derived global sections can be computed by Cech cohomology,
+hopefully in an obvious way!
+
+\section{Derived stable $\infty$-categories for the working mathematician}
+
+The goal of this section is to answer :
+\begin{center}
+  \text{Question : What should derived categories and derived functors be?}
+\end{center}
+% \begin{prop}
+
+%   Let $A$ be an additive category.
+%   Consider $N_{dg}(\CH A) \in \SSET$ the dg nerve of the differential graded
+%   category of chain complexes in $A$.
+%   Then $N_{dg}(\CH A)$ is a stable infinity category.
+% \end{prop}
+% \begin{proof}
+%   \cite[Prop. 1.3.2.10]{lurie-HA}
+% \end{proof}
+
+
+% \begin{prop}
+%   Let $A$ be Grothendieck abelian,
+%   i.e. presentable abelian category
+%   \footnote{
+%     i.e. $A$ admits small colimits and there exists
+%     a set of $\ka$-compact objects generating $A$ under small colimits
+%     for some regular cardinal $\ka$.
+%   }
+%   such that filtered colimits are exact.
+%   Let $\cD(A)$ be the full subcategory of $N_{dg}(\CH \, A)$
+%   of $W$-local objects.\cite[Def. 5.5.4.1]{lurie-HTT}
+%   Then \begin{enumerate}
+%     \item $\cD(A)$ is presentable. 
+%     \item there exists a left adjoint $L : N_{dg}(\CH \, A) \to \cD(A)$
+%     to the inclusion.
+%     \item $\cD(A)$ is stable.
+%     \item 
+%     Let $\CH_f A$ denote the full subcategory of $\CH\,A$
+%     consisting of fibrant objects.
+%     Then the inclusion $N_{dg}(\CH_f A) \subs N_{dg}(\CH\,A)$ 
+%     induces an equivalence $N_{dg}(\CH_f A) \simeq \cD(A)$.
+%     In other words, this definition agrees with 
+%     \cite[Def. 1.3.5.8]{lurie-HA}
+%     \item For a morphism $f$ in $N_{dg}(\CH\,A)$ with cofiber $Q$,
+%     the following are equivalent : 
+%     \begin{enumerate}
+%       \item $f \in W$
+%       \item $Q$ is acyclic
+%       \item $LQ = 0$
+%       \item $L(f)$ is an isomorphism in $\cD(A)$.
+%     \end{enumerate}
+%     Hence, the functor $L$ exhibits $\cD(A)$ as a
+%     derived infinity category of $A$.
+%     \item (Classical definition) 
+%     Consider the full subcategory $\mathrm{Acyc}\,A \subs \CH A$
+%     of acyclic complexes.
+%     Then for all stable infinity categories $\cE$,
+%     restriction along $L$ induces 
+%     a fully faithful embedding of infinity categories \[
+%       \FUN_{\mathrm{ex}}(\cD(A), \cE) \map{}{}
+%       \FUN_{\mathrm{ex}}(N_{dg}(\CH  A) , \cE)
+%     \]
+%     where $\FUN_{\mathrm{ex}}$ means the infinity category of exact functors,
+%     and the essential image consists of 
+%     functors where every $X \in \mathrm{Acyc}\,A$ is mapped to a zero object.
+%   \end{enumerate} 
+% \end{prop}
+% \begin{proof}
+%   (1) and (2) are parts (2) and (3) of \cite[Prop. 5.5.4.15]{lurie-HTT}.
+
+%   (3) \cite[Lem. 1.1.3.3]{lurie-HA}
+  
+%   (4) \cite[Prop. 1.3.5.14]{lurie-HA} shows that
+%   $N_{dg}(\CH_f A) \subs \cD(A)$.
+%   It remains to show essentially surjective.
+%   Let $X \in \cD(A)$. We can choose a trivial cofibration $f : X \to Q$
+%   where $Q \in N_{dg}(\CH_f A)$.
+%   But by Yoneda and \cite[Prop. 1.3.5.14]{lurie-HA} again,
+%   it follows that $f$ is an isomorphism in $\cD(A)$.
+
+%   (5) \cite[Prop. 5.2.7.12]{lurie-HTT} gives the ``Hence''.
+%   Now let $f : X \to Y$ and $Y \to Q$ the cofiber.
+%   We have a commuting triangle \begin{cd}
+%   	Q & LQ \\
+% 	{\widetilde{Q}}
+% 	\arrow[from=1-1, to=1-2]
+% 	\arrow[from=1-1, to=2-1]
+% 	\arrow[dashed, from=1-2, to=2-1]
+%   \end{cd}
+%   where $Q \to \TILDE{Q}$ is a trivial cofibration with $\TILDE{Q}$ fibrant,
+%   the unit of the adjunction $Q \to LQ$ is an $W$-equivalence 
+%   as in the proof of \cite[Prop. 5.5.4.15]{lurie-HA},
+%   and $LQ \to \TILDE{Q}$ is due to the adjunction.
+%   By two-out-of-three for $W$-equivalences,
+%   $LQ \to \TILDE{Q}$ is an $W$-equivalence and hence an isomorphism.
+%   Now $f \in W$ iff $Q$ is acyclic
+%   iff $\TILDE{Q}$ is acyclic iff 
+%   $0 \to \TILDE{Q} \in W$ iff
+%   $0 = \TILDE{Q}$ iff $0 = LQ$ iff 
+%   $L(f)$ is an isomorphism.
+
+%   (6) $L : N_{dg}(\CH\,A) \to \cD(A)$ being right exact implies
+%   it is exact.
+%   Composition of exact functors between stable infinity categories
+%   is again exact.
+%   Fully faithfulness follows from (5).
+%   Let $F : N_{dg}(\CH\,A) \to \cE$ be an exact functor.
+%   If $F$ inverts quasi-isomorphisms,
+%   then $F(Q) = 0$ for any acyclic $Q$ because $0 \to Q \in W$.
+%   Conversely, if $F$ kills acyclics,
+%   then $f \in W$ implies its cofiber $Q$ is acyclic,
+%   which implies $F(Q) = 0$ which implies $F(f)$ is invertible
+%   because exact functors preserve exact triangles.
+% \end{proof}
+% Given $F : A \to B$ between abelian categories,
+% \begin{enumerate}
+%   \item a right derived functor $RF$ should be
+%   a \emph{left} Kan extension of $N_{dg}(\CH\,A) \to N_{dg}(\CH\,B) \to \cD(B)$ along
+%   $N_{dg}(\CH\,A) \to \cD(A)$.
+%   \item a left derived functor $LF$ should be
+%   a \emph{right} Kan extension similarly.
+% \end{enumerate}
+
+% \cite[1.3.5.24]{lurie-HA} for comparison
+% with animation.
+Idea : The derived category $\cD(A)$ of an abelian category $A$ should 
+have the following properties.
+\begin{enumerate}
+  \item $\cD(A)$ has zero object
+  \item In $\cD(A)$, every morphism has kernel and cokernel.
+  Things will get confusing so let us rename them to fiber and cofiber,
+  reserving the words kernel and cokernel for abelian categories.
+  A sequence $M \to N \to Q$ in $\cD(A)$ 
+  is called left exact when it is fiber square.
+  Similarly for right exact and cofiber sequence.
+  \item (Key) In $\cD(A)$, left exact iff right exact iff exact.
+  These are called exact triangles.
+  \item Equipped with a fully faithful functor $A \to \cD(A)$
+\end{enumerate}
+All of above is satisfied by the category of chain complexes
+with morphisms up to chain homotopy,
+when suitably interpreted.
+The following makes the difference and gives $\cD(A)$ : 
+\begin{enumerate}[resume]
+  \item A sequence $0 \to M \to N \to Q \to 0$ in $A$ should be
+  short exact iff $M \to N \to Q$ is exact triangle in $\cD(A)$.\footnote{
+    \textbf{This feels very much like 
+  $C$ category with site structure,
+  $\PSH C$ has all colimits,
+  now quotient to $\SH C$ to force some coequalizers in $C$
+  to be preserved under $C \to \PSH C$.
+  Is there more to this?
+  It would be nice to have a more canonical construction of
+  $N_{dg}(\CH \, A)$ for Grothendieck abelian $A$.
+  This is not quite animation because $A$ may not have enough
+  compact projectives. 
+  (E.g. category of abelian sheaves on a topological space.)
+}
+  }
+  \item Regarding derived functors : 
+  Given an additive functor $F : A \to B$,
+  there should be some induced functor $\cD(A) \to \cD(B)$.
+  When $F$ is say left exact, 
+  the induced functor should be left exact too.
+  But it turns out for functors between stable $\infty$-categories,
+  a functor is left exact iff right exact iff exact!
+  \cite[Prop. 1.1.4.1]{lurie-HA}
+\end{enumerate}
+The properties (1) to (4) are word-for-word the definition
+of a \emph{stable $\infty$-category},\cite[Def. 1.1.1.9]{lurie-HA}
+modulo being precise about universal properties (zero object,
+fiber, cofiber).
+You are probably rolling your eyes : 
+\emph{Why must $\infty$-categories be involved?}
+Here are some reasons : 
+\begin{enumerate}
+  \item Abelian categories are not enough : 
+  The key property forces all morphisms to be epimorphisms.
+  Given a morphism $f : M \to N$, 
+  we get a left exact sequence $\ker f \to M \to N$.
+  If we have property (3) then we are forced $\mathrm{Im}\,f \simeq N$.
+  The ``extra room'' granted by seeing things as 
+  $\infty$-categories rather than 1-categories is 
+  what will make property (3) possible.
+  
+  \item Triangulated categories are difficult to glue : 
+  we will return to this point later.
+  Let us say for now that 
+  the theory of triangulated categories is literally a truncation
+  of the theory of stable $\infty$-categories.\cite[Thm. 1.1.2.14]{lurie-HA}
+\end{enumerate}
+Here are some general intuition for thinking about $\infty$-categories : 
+\begin{enumerate}
+  \item There is really only one idea : 
+  sets are seen as discrete spaces,
+  then generalised to CW complexes \emph{up to homotopy}.
+  The rest are consequences of this.
+  ``CW complexes up to homotopy'' are what people
+  mean by \emph{spaces}.
+  \item Given an $\infty$-category $\cC$ and two objects $x , y$ in it,
+  there is a space $\MAP_\bC(x , y)$ whose points are morphisms 
+  $f : x \to y$ in $\cC$.
+  \item Whenever you see ``there exists unique'' in 1-category theory,
+  it is equivalent to asking for a set to be isomorphic to the singleton.
+  In $\infty$-categories, you need to replace
+  this with ``the space is contractible''.
+  This underlies the entire theory of universal properties.
+\end{enumerate}
+Without further ado :
+\begin{prop}
+
+  Let $A$ be an additive category.
+  Consider $\cK(A) \in \SSET$ 
+  the dg nerve of the differential graded
+  category of unbounded chain complexes in $A$.
+  Then $\cK(A)$ is a stable infinity category.
+  \textbf{TODO : Fill in details about standard $t$-structure
+  giving $A$ as heart.}
+\end{prop}
+\begin{proof}
+  \cite[Prop. 1.3.2.10]{lurie-HA}
+\end{proof}
+\cite[Remark 1.3.1.12]{lurie-HA}
+shows that for $X , Y \in \cK(A)$,
+we have an equivalence of spaces \[
+  \MAP_{\cK(A)}(X , Y) \simeq \mathrm{DK}(\tau^{\leq 0} {\HOM}(X, Y))
+\]
+where $\HOM(X , Y) \in \CH\,\bZ$ is the hom complex,
+$\tau^{\leq 0}$ is truncation killing all cohomologies in positive degree, 
+and $\mathrm{DK}$ is the Dold-Kan equivalence
+of 1-categories : \[
+  \mathrm{DK} : \CH^{\leq 0}(\AB) \map{\sim}{} \FUN(\De^{\OP} , \AB)
+\]
+Applying \cite[Remark 1.2.3.14]{lurie-HA}, the homotopy groups
+of the mapping space are the same as the cohomologies of the hom complex.
+Since $\cK(A)$ is stable,
+the mapping spaces naturally extend to mapping spectra.
+We can access the negative homotopy groups by looping $Y$.
+% \begin{dfn}
+  
+%   Let $\cC$ be an $\infty$-category and $W$ a collection of morphisms in $\cC$.
+%   A functor $\cC \to \cC[W^{-1}]$ is called the localization
+%   of $C$ at $W$ when for all $\infty$-categories $\cE$
+%   restriction gives a fully faithful embedding \[
+%     \FUN(\cC[W^{-1}] , \cE) \to \FUN(\cC , \cE)
+%   \]
+%   with essential image consisting of functors
+%   which send morphisms in $W$ to isomorphisms.
+% \end{dfn}
+\begin{dfn}\cite[Definition 1.3.4.1]{lurie-HA}
+  Let $A$ be an abelian category.
+  Let $W$ denote the collection of quasi-isomorphisms in $\cK(A)$.
+  We say an exact functor of stable $\infty$-categories 
+  $L : \cK(A) \to \cD(A)$
+  exhibits $\cD(A)$ as the derived stable $\infty$-category of $A$ when
+  for any stable $\infty$-category $\cE$,
+  restriction along $L$ induces a fully faithful embeding \[
+    \FUN_{\mathrm{ex}}(\cD(A) , \cE) \to \FUN_{\mathrm{ex}}(\cK(A) , \cE)
+  \]
+  where $\FUN_{\mathrm{ex}}$ means the $\infty$-category of exact functors
+  and we require the essential image to be precisely
+  consisting of exact functors which invert $W$.
+\end{dfn}
+This is equivalent to the following formulation,
+closer to the classical idea of Verdier quotients of triangulated categories : 
+\begin{prop}
+  An exact functor $L : \cK(A) \to \cD(A)$ of stable $\infty$-categories
+  exhibits $\cD(A)$ as the derived stable $\infty$-category of $A$
+  iff for all stable infinity categories $\cE$,
+  restriction along $L$ induces 
+  a fully faithful embedding of infinity categories \[
+    \FUN_{\mathrm{ex}}(\cD(A), \cE) \map{}{}
+    \FUN_{\mathrm{ex}}(\cK(A) , \cE)
+  \]
+  with essential image consisting precisely of 
+  functors where every acyclic $X$ maps to a zero object.
+\end{prop}
+\begin{proof}
+  Let $F : \cK(A) \to \cE$ be an exact functor.
+  If $F$ inverts quasi-isomorphisms,
+  then $F(Q) = 0$ for any acyclic $Q$ because $0 \to Q \in W$.
+  Conversely, if $F$ kills acyclics,
+  then $f \in W$ implies its cofiber $Q$ is acyclic by long exact
+  sequence of cohomologies associated to the standard $t$-structure 
+  (or just direct computation),
+  which implies $F(Q) = 0$ which implies $F(f)$ is invertible
+  because exact functors preserve exact triangles.
+\end{proof}
+Let $F : A \to B$ an additive functor of abelian categories.
+Suppose we have derived categories for $A$ and $B$.
+The functor $F$ induces an exact functor $\cK(A) \to \cK(B)$.
+\begin{center}
+  \text{Question : Can we extend $F$ along derived categories? }
+\end{center}
+\begin{cd}
+  {\mathcal{K}(A)} & {\mathcal{K}(B)} \\
+	{\mathcal{D}(A)} & {\mathcal{D}(B)}
+	\arrow["F", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{?}", dashed, from=2-1, to=2-2]
+\end{cd}
+In general, this won't be possible because
+$F$ need not take quasi-isomorphisms to quasi-isomorphisms.
+\begin{center}
+  \text{Idea : approximate $X \in \cD(A)$ with objects from $\cK(A)$.} 
+\end{center}
+There are two directions we can do : look at morphisms $LY \to X$
+or look at morphisms $X \to LY$.
+Let us focus on the morphisms from the left.
+More precisely, consider the comma category $\cK(A)_{/ X}$
+whose objects are pairs $(Y , L Y \to X)$ where $Y \in \cK(A)$
+and morphisms are ones in $\cK(A)$ commuting with
+the map to $X$ after applying $L$.
+Consider the diagram in $\cD(B)$ : 
+\[
+  \cK(A)_{/X} \to \cK(A) \map{F}{} \cK(B) \to \cD(B)
+\]
+Then the ``best approximation of $F$ at $X$ from the left'' is defined as
+\[
+  \text{ ``$RF(X) := \COLIM_{(Y \in \cK(A) , LY \to X)} F(Y) \in \cD(B)$''}
+\]
+Doing this at every $X \in D(A)$, 
+we get the so-called \emph{(pointwise) 
+  left Kan extension of $F$ along $\cK(A) \to \cD(A)$}.\cite[
+    \href{https://kerodon.net/tag/0300}{Tag 0300}
+    ]{kerodon}
+However, I put quotation marks because this runs into two issues : 
+\begin{enumerate}
+  \item The colimit may not exist in $\cD(B)$
+  \item If $RF$ is defined
+  on terms of an exact triangle $M \to N \to Q$,
+  we would like $RF$ to take this to an exact triangle in $\cD(B)$,
+  i.e. we want $RF$ to be an exact functor.
+  This is not immediately clear from the formula.
+\end{enumerate}
+Stable $\infty$-categories like $\cD(B)$ are not far off
+from having all colimits; they already have finite colimits.
+For $\infty$-categories with finite colimits,
+there is a canonical way to formally add in all colimits
+whilst preserving the finite colimits already present : 
+the ind-completion.
+We proceed as follows : 
+\begin{dfn}
+  Consider the commutative diagram : 
+  \begin{cd}
+    {\cK(A)} & {\cK(A)} & {\mathcal{D}(B)} \\
+    {\mathcal{D}(A)} & {\mathrm{Ind}\,\cK(A)} & {\mathrm{Ind}\,\mathcal{D}(B)}
+    \arrow[from=1-1, to=2-1]
+    \arrow["{=}"', from=1-2, to=1-1]
+    \arrow["F", from=1-2, to=1-3]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=1-3, to=2-3]
+    \arrow["{\mathrm{Lan}}"', from=2-1, to=2-2]
+    \arrow["{\mathrm{Ind}\,F}"', from=2-2, to=2-3]
+  \end{cd}
+  where \begin{enumerate}
+    \item each Yoneda embedding $\cK \to \PSH \cK$
+    factors through the inclusion $\IND \cK \subs \PSH \cK$
+    and preserves finite colimits.
+    \item The ind-completions are stable. \cite[1.1.3.6]{lurie-HA}
+    \item The ind-completions have arbitrary colimits
+    because $\cK(A) , \cD(B)$ have finite colimits.
+    \item $\cD(A) \to \IND\,\cK(A)$ is the restriction of
+    the Yoenda embedding.
+    On objects, it takes $X \in \cD(A)$
+    to $\HOM(L \,\_ , X)$.
+    Under the equivalence of presheaves of spaces
+    and right fibrations,
+    $\HOM(L \,\_ , X)$ corresponds to
+    precisely the diagram $\cK(A)_{/ X} \to \cK(A)$.
+    Since $\IND \subs \PSH$ is stable under finite limits,
+    we have that $\cD(A) \to \IND\,\cK(A)$ is exact.
+  \end{enumerate}
+  The composition of bottom row is thus an exact functor,
+  which we call the \emph{right derived functor $RF$ of $F$}.
+  We say $RF$ is defined at $X \in \cD(A)$ when
+  $RF(X)$ lands in $\cD(B)$.
+\end{dfn}
+There are still several problems : 
+\begin{itemize}
+  \item (Q1) How can we compute $RF$?
+  \item (Q2) If $A$ is not small, like the 1-category of abelian groups,
+  then the homs of, say, the classical derived stable $\infty$-category $h \cD(A)$
+  are too large to be sets!
+\end{itemize}
+For (Q1), we seek to find conditions so that
+the colimit diagram simplifies and lands in $\cD(B)$.
+The most ideal situation would be if we can replace the diagram 
+by constant diagram without changing the colimit.
+This happens iff the diagram has a final object,
+\cite[\href{https://kerodon.net/tag/03LQ}{Tag 03LQ}]{kerodon}
+so this is what we ask for!
+\begin{prop}
+  
+  Let $X \in \cD(A)$. Suppose the functor 
+  $\HOM_{\cD(A)}(L \_ , X)$ on $\cK(A)$ is representable
+  by some $I \in \cK(A)$, i.e. we have an isomorphism \[
+    \HOM_{\cD(A)}(L \_ , X) \map{\sim}{} \HOM_{\cK(A)}(\_ , I)
+  \]
+  In particular, the identity of $I$ gives 
+  a point \[
+    \De^0 \to \cK(A)_{/ X}
+  \]
+  This inclusion is right cofinal.
+  Hence the right derived functor of $F$ is defined at $X$ 
+  and we have $RF(X) \simeq F(I)$.
+\end{prop}
+\begin{proof}
+  Under the equivalence of contravariant functors into $\mathrm{Spaces}$
+  and right fibrations,
+  the assumption is precisely an isomorphism 
+  between right fibrations \begin{cd}
+    {\mathcal{K}(A)_{/ X}} && {\mathcal{K}(A)_{/ I}} \\
+    & {\mathcal{K}(A)}
+    \arrow["\sim"', from=1-1, to=1-3]
+    \arrow[from=1-1, to=2-2]
+    \arrow[from=1-3, to=2-2]
+  \end{cd}
+  By preservation of colimits 
+  under changing the diagram up to categorical equivalence,
+  \cite[\href{https://kerodon.net/tag/02N5}{Tag 02N5}]{kerodon}
+  we now seek the colimit of the diagram 
+  $\cK(A)_{/ I} \to \cK(A) \to \cD(B) \to \IND\,\cD(B)$.
+  We have the final object in $\cK(A) / I$ given by $\id : I \to I$.
+  The inclusion of a point is right cofinal iff the point is a final object.
+  \cite[\href{https://kerodon.net/tag/03LQ}{Tag 03LQ}]{kerodon}
+  Thus the desired colimit is computed as 
+  the image $F(I)$.
+  \cite[\href{https://kerodon.net/tag/02XW}{Tag 02XW}]{kerodon}
+\end{proof}
+\begin{center}
+  Punchline : to compute $RF$ on all of $\cD(A)$,
+  it suffices to find a right adjoint to the localization functor 
+  $L : \cK(A) \to \cD(A)$.\footnote{
+    Dualize \cite[\href{https://kerodon.net/tag/02FV}{Tag 02FV}]{kerodon}
+    for precise statment about existence of right adjoint
+    from pointwise representability.
+  }
+\end{center}
+Of course, the dual story for \emph{the left derived functor of $F$}
+is true by reversing all arrows, 
+replacing colimits with limits,
+ind-completion with pro-completion. 
+(Keeping in mind the dual of 
+a stable $\infty$-category is again stable!)
+
+It turns out there is a situation where one can find a 
+\emph{fully faithful} right adjoint to $L$,
+realising $\cD(A)$ as a \emph{full subcategory of $\cK(A)$}.
+This general pattern of finding localizations as full subcategories
+is called \emph{reflective localization}, or 
+in model category theory called \emph{Bousfield localization}.
+The dual notion when one can find a full faithful \emph{left} adjoint
+to the localization functor $L$ is called \emph{coreflective localization}.
+\begin{dfn}
+  \cite[\href{https://kerodon.net/tag/02G0}{Tag 02G0}]{kerodon}
+
+  Let $\cC$ be an $\infty$-category and $W$ a collection of morphisms.
+  $W$ is called \emph{localizing} when the following are satisfied : 
+  \begin{enumerate}
+    \item isomorphisms are in $W$
+    \item For any commuting triangle in $C$
+    \begin{cd}
+      X && Z \\
+      & Y
+      \arrow["c", from=1-1, to=1-3]
+      \arrow["a"', from=1-1, to=2-2]
+      \arrow["b"', from=2-2, to=1-3]
+    \end{cd}
+    with $b \in W$, then $a \in W$ iff $c \in W$.
+    \item For all $X \in \cC$ there exists 
+    a morphism $X \to \TILDE{X}$ in $W$ such that $\TILDE{X}$ is
+    $W$-local, meaning for all $f \in W$, $\MAP_C(f , \TILDE{X})$
+    is an equivalence of spaces.
+  \end{enumerate}
+  Dually, $W$ is called \emph{co-localizing} when it satisfies
+  (1) and (2) with a dual version of (3) : 
+  For all $X \in \cC$ there exists $\TILDE{X} \to X$ in $W$
+  with $\TILDE{X}$ $W$-co-local, meaning
+  for all $f \in W$, $\MAP_\cC(\TILDE{X} , f)$ is an equivalence of spaces.
+\end{dfn}
+The significance of localizing / co-localizing collections of morphisms 
+is the following : 
+\begin{prop}
+  \cite[\href{https://kerodon.net/tag/02G3}{Tag 02G3}]{kerodon}
+  \label{local:fundamental}
+  Let $\cC$ be an $\infty$-category
+  and $W$ a collection of morphisms.
+  Let $\cI \subs \cC$ is the full subcategory of $W$-local objects.
+  Then TFAE : 
+  \begin{enumerate}
+    \item $W$ is localizing.
+    \item $\cI$ is reflective and $W$ is precisely
+    the collection of morphisms $f$ such that $L(f)$.
+  \end{enumerate}
+  In this case, $\cI \subs \cC$ has a left adjoint $L$
+  and $L$ exhibits $\cI$ as the localization of $\cC$ at $W$.
+
+  We have dual statements for when $W$ is co-localizing.
+\end{prop}
+\begin{proof}
+  (1) iff (2) is the equivalence of (a) and (c)
+  in \cite[\href{https://kerodon.net/tag/05Z2}{Tag 05Z2}]{kerodon}.
+
+  A full subcategory of reflective iff the inclusion 
+  admits a left adjoint.\cite[\href{https://kerodon.net/tag/02FA}{Tag 02FA}]{kerodon}
+
+  $L$ is then a localization functor.
+  \cite[\href{https://kerodon.net/tag/04JL}{Tag 04JL}]{kerodon}
+  $L$ exhibits $\cI$ as the localization of $\cC$ at
+  the collection of morphisms $f$ such that $L(f)$.
+  \cite[\href{https://kerodon.net/tag/04JH}{Tag 04JH}]{kerodon}
+  This is precisely $W$ by (2).
+\end{proof}
+
+We will prove that when $\cC = \cK(A)$ for abelian $A$ 
+and $W$ the collection of quasi-isomorphisms,
+then certain conditions make $W$ localizing or co-localizing.
+Some terminology : in the case of $\cK(A)$,
+$W$-local objects are called $K$-injectives 
+and $W$-co-local objects are called $K$-projectives.
+\cite[\href{https://stacks.math.columbia.edu/tag/070G}{Tag 070G}]{stacks-project}
+
+\begin{prop}[Derived categories via injective resolution]
+  Let $A$ be Grothendieck abelian,
+  i.e. presentable abelian category with exact filtered colimits.
+  Then the collection $W$ of quasi-isomorphisms is localizing.
+  Hence \begin{enumerate}
+    \item the inclusion $\cI \subs \cK(A)$ of the full subcategory of
+    $K$-injective objects has a left adjoint $L$.
+    \item $\cI$ is stable. Hence 
+    $L$ exhibits it as a derived stable $\infty$-category of $A$.
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  The first two conditions for $W$ being localizing is clear.
+  We need to produce for each $X \in \cK(A)$
+  a quasi-isomorphism $X \to I$ such that $I$ is $K$-injective.
+  And now enters the non-formal input :
+  there is a left proper combinatorial model structure on $\CH\,A$.
+  \cite[Lem. 1.3.5.3]{lurie-HA}
+  It follows that every $X \in \cK(A)$ admits
+  a trivial cofibration $X \to I$ with $I$ fibrant.
+  \cite[Lem. 1.3.5.14]{lurie-HA} shows that
+  fibrant $I$ lie in $\cI$,
+  completing the proof that $W$ is localizing.
+  \ref{local:fundamental} gives (1) and shows that we have 
+  a derived stable $\infty$-category of $A$ provided we prove $\cI$ is stable.
+  \cite[Prop. 1.3.5.9]{lurie-HA} proves precisely this.
+\end{proof}
+The size issue (Q2) is solved if when one can show
+the homs in $h \cI$ are small.
+This is covered in \cite[Prop. 1.3.5.14]{lurie-HA}.
+
+\section{The stable $\infty$-category of quasi-coherent sheaves for a scheme}
+
+\textbf{TODO}
+\begin{enumerate}
+  \item A scheme $X$ is a functor which is a small colimit of affines.
+  In fact, determined by right cofinal subdiagram of the affine opens.
+  \item Define $\QCOH\,X := \LIM_{\SPEC A \to X} D(\MOD_A)$.
+  Works because small limits of stable $\infty$-categories is
+  again a stable $\infty$-category.
+  This is easier than triangulated categories 
+  because stability is a \emph{property}
+  whilst a triangulated structure on an additive category is \emph{data}.
+  \item $\QCOH\,X \simeq \LIM_{U \text{ affine open }\subs X} D(\MOD_{\cO(U)})$
+  and Zariski localization is flat so the $t$-structure 
+  on affine opens define a $t$-structure on $\QCOH\,X$.
+  Specifically, $(\QCOH\,X)^{\leq 0} := \LIM_{U} D^{\leq 0}(\MOD_{\cO(U)})$.
+  \item Prove $(\QCOH \,X)^\heartsuit \simeq \LIM_{U} \MOD_{\cO(U)}$
+  which is the usual definition of quasi-coherent sheaves.
+\end{enumerate}
+
+\section{Cech cohomology and more generally flat base change}
+
+\textbf{TODO}
+\begin{enumerate}
+  \item Cech complex being resolution is just Zariski descent.
+  \item Affines having no higher cohomology
+  means we have ``a good approximation of a scheme
+  by cohomological simplicies'' in the same sense
+  as if we built a CW complex by gluing simplicies.
+  \item Crucially use the fact that the \emph{raison d'être}
+  of derived functors between derived categories is that
+  everything is always \emph{exact}.
+  \item \textbf{Systematic handling when cover size is enlarged
+  is what leads to spectral sequence?}
+  \item Flat base change for qcqs morphisms is just realising
+  Cech complex only requires interesction of affines to be 
+  covered by finitely many affines and computes derived direct image
+  for base change because of flatness assumption.
+\end{enumerate}
+
+\printbibliography
+
+\end{document}
