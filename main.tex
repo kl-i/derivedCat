@@ -150,7 +150,7 @@ have the following properties.
   A sequence $M \to N \to Q$ in $\cD(A)$ 
   is called left exact when it is fiber square.
   Similarly for right exact and cofiber sequence.
-  \item (Key) In $\cD(A)$, left exact iff right exact iff exact.
+  \item In $\cD(A)$, left exact iff right exact iff exact.
   These are called exact triangles.
   \item Equipped with a fully faithful functor $A \to \cD(A)$
 \end{enumerate}
@@ -174,25 +174,18 @@ The following makes the difference and gives $\cD(A)$ :
   (E.g. category of abelian sheaves on a topological space.)
 }
   }
-  \item Regarding derived functors : 
-  Given an additive functor $F : A \to B$,
-  there should be some induced functor $\cD(A) \to \cD(B)$.
-  When $F$ is say left exact, 
-  the induced functor should be left exact too.
-  But it turns out for functors between stable $\infty$-categories,
-  a functor is left exact iff right exact iff exact!
-  \cite[Prop. 1.1.4.1]{lurie-HA}
 \end{enumerate}
-The properties (1) to (4) are word-for-word the definition
+The properties (1) to (3) are word-for-word the definition
 of a \emph{stable $\infty$-category},\cite[Def. 1.1.1.9]{lurie-HA}
 modulo being precise about universal properties (zero object,
 fiber, cofiber).
-You are probably rolling your eyes : 
+Property (4) will be the reason for \emph{$t$-structures}.
+You are probably rolling your eyes: 
 \emph{Why must $\infty$-categories be involved?}
-Here are some reasons : 
+Here are some reasons: 
 \begin{enumerate}
-  \item Abelian categories are not enough : 
-  The key property forces all morphisms to be epimorphisms.
+  \item Abelian categories are too strict : 
+  Property (3) forces all morphisms to be epimorphisms.
   Given a morphism $f : M \to N$, 
   we get a left exact sequence $\ker f \to M \to N$.
   If we have property (3) then we are forced $\mathrm{Im}\,f \simeq N$.
@@ -223,6 +216,19 @@ Here are some general intuition for thinking about $\infty$-categories :
   this with ``the space is contractible''.
   This underlies the entire theory of universal properties.
 \end{enumerate}
+Regarding derived functors : 
+Given an additive functor $F : A \to B$,
+there should be some induced functor $\cD(A) \to \cD(B)$.
+When $F$ is say left exact, 
+the induced functor should be left exact too.
+But it turns out for functors between stable $\infty$-categories,
+a functor is left exact iff right exact iff exact!
+\cite[Prop. 1.1.4.1]{lurie-HA}
+We will now make the following precise, but the answer to the first question is :
+\begin{center}
+  \text{Derived categories and derived functors are what you get
+  when you force left exact iff right exact iff exact.}
+\end{center}
 Without further ado :
 \begin{prop}
 
@@ -501,7 +507,7 @@ to the localization functor $L$ is called \emph{coreflective localization}.
 \end{dfn}
 The significance of localizing / co-localizing collections of morphisms 
 is the following : 
-\begin{prop}
+\begin{prop}[Characterisation of (co)reflective localizations]
   \cite[\href{https://kerodon.net/tag/02G3}{Tag 02G3}]{kerodon}
   \label{local:fundamental}
   Let $\cC$ be an $\infty$-category
@@ -574,7 +580,6 @@ homotopy projectives in \cite[Section 14.3]{KS06}.
 The size issue (Q2) is solved if when one can show
 the homs in $h \cI$ are small.
 This is covered in \cite[Prop. 1.3.5.14]{lurie-HA}.
-
 Let us note that we can also have co-localizing situation.
 \begin{prop}[Derived categories via coreflective localization]
   Let $A$ be abelian with small direct sums,
@@ -608,8 +613,8 @@ stable $\infty$-category $\cE$ :
 	\arrow[shift left=2, from=2-2, to=1-1]
 	\arrow["\pi"{description}, from=2-2, to=2-1]
 	\arrow[shift right=2, from=2-2, to=3-1]
-	\arrow["{F \mapsto LF = F p}", shift left=5, from=2-4, to=2-5]
-	\arrow["{F \mapsto RF = Fi}"', shift right=5, from=2-4, to=2-5]
+	\arrow["{F \mapsto RF = F i}", shift left=5, from=2-4, to=2-5]
+	\arrow["{F \mapsto LF = F p}"', shift right=5, from=2-4, to=2-5]
 	\arrow["\bot"{description}, shift left=3, draw=none, from=2-4, to=2-5]
 	\arrow["\bot"{description}, shift right=3, draw=none, from=2-4, to=2-5]
 	\arrow["{\pi^*}"{description}, from=2-5, to=2-4]
@@ -622,10 +627,13 @@ where \begin{enumerate}
   $\pi : \cK(A) \to \cD(A)$.
   Notice that $\cP$ and $\cI$ are \emph{not} equal as 
   full subcategories of $\cK$.
-  \item taking left derived functors by composing with $K$-projective
-  replacement gives left adjoint to restricting functors along $\pi$.
-  \item taking right derived functors by composing with $K$-injective
-  replacement gives a right adjoint to restricting functors along $\pi$.
+  \item taking \emph{left} derived functors by composing with $K$-projective
+  replacement gives \emph{right} adjoint to restricting functors along $\pi$,
+  A.K.A. (pointwise) \emph{right} Kan extensions. 
+  It is unfortunate that the left/right naming does not match.
+  \item taking \emph{right} derived functors by composing with $K$-injective
+  replacement gives a \emph{left} adjoint to restricting functors along $\pi$,
+  A.K.A. (pointwise) \emph{left} Kan extension.
 \end{enumerate}
 It is possible to be in the Grothendieck abelian case,
 with a priori not enough projectives.
@@ -654,10 +662,12 @@ left derived functors.
 
 One can ask for the comparison of $RF$ to $F$ : 
 \begin{prop}
-  Let $A$ Grothendieck abelian and $X \in A$
-  and $F : A \to B$ a left exact additive functor of abelian categories.
-  Let us assume we have a derived stable $\infty$-category of $B$.
-  Then then there is an induced isomorphism $H^0(RF(X)) \to F(X)$.
+  Let $F : A \to B$ an additive functor of abelian categories.
+  Assume that $W$ in $\cK(A)$ is localizing.
+  Suppose we also have a derived stable $\infty$-category of $B$.
+  Assume $F$ is left exact.
+  Then there is an induced isomorphism $H^0(RF(X)) \to F(X)$.
+  \footnote{Converse is probably true, but I am uninterested.}
 
   Similarly for left derived functors and enough projectives.
 \end{prop}
@@ -669,7 +679,7 @@ One can ask for the comparison of $RF$ to $F$ :
   \ref{local:fundamental}
   Since $H^i X = X$ when $i = 0$ and zero otherwise,
   we can replace $I$ with a complex concentrated in cohomological degrees 
-  $\geq 0$.
+  $\geq 0$, exact everywhere except $X = H^i(X) \simeq H^0(I)$.
   Then \[
     RF(X) \simeq F(I)
   \]
@@ -685,7 +695,7 @@ One can ask for the comparison of $RF$ to $F$ :
 To answer this, we introduce \emph{acyclic resolutions}.
 This requires $W$ to be co-localizing to the left derived functors
 and localizing to do right derived functors.
-\begin{prop}
+\begin{prop}\label{derived:acyclic_res}
   Let $F : A \to B$ a left exact additive functor between abelian categories.
   Assume we have derived stable $\infty$-categories.
   Further assume for $A$ that $W$ is co-localizing
@@ -719,6 +729,12 @@ using flat modules.
 We are also free to cook up any resolution as long as
 it is acyclic for the derived functor.
 
+\textbf{TODO : If $W$ is co-localizing for $\cK(A)$
+and $A$ has $\_ \otimes \_$ lifting to $\mathrm{Tot}(\_ \otimes \_)$
+on $\cK(A)$,
+then showing say $\cP$ is closed under $\mathrm{Tot(\_ \otimes \_)}$
+should give symmetric monoidal structure on $\cD(A)$?}
+
 \section{The stable $\infty$-category of quasi-coherent sheaves for a scheme}
 
 \textbf{TODO}
@@ -743,16 +759,17 @@ it is acyclic for the derived functor.
 
 \textbf{TODO}
 \begin{enumerate}
-  \item Cech complex being resolution is just Zariski descent.
   \item Affines having no higher cohomology
   means we have ``a good approximation of a scheme
   by cohomological simplicies'' in the same sense
   as if we built a CW complex by gluing simplicies.
-  \item Crucially use the fact that the \emph{raison d'être}
-  of derived functors between derived categories is that
-  everything is always \emph{exact}.
-  \item \textbf{Systematic handling when cover size is enlarged
-  is what leads to spectral sequence?}
+  Explain how taking tubular neighbourhoods of faces gives
+  a Cech cover of CW complex.
+  \item Cech complex being resolution is just Zariski descent.
+  Previous point implies Cech complex is
+  acyclic resolution for derived direct image.
+  Hence Cech cohomology computes higher direct images by 
+  \ref{derived:acyclic_res}.
   \item Flat base change for qcqs morphisms is just realising
   Cech complex only requires interesction of affines to be 
   covered by finitely many affines and computes derived direct image
