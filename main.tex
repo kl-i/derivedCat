@@ -337,7 +337,7 @@ Then the ``best approximation of $F$ at $X$ from the left'' is defined as
 \[
   \text{ ``$RF(X) := \COLIM_{(Y \in \cK(A) , LY \to X)} F(Y) \in \cD(B)$''}
 \]
-Doing this at every $X \in D(A)$, 
+Doing this at every $X \in \cD(A)$, 
 we get the so-called \emph{(pointwise) 
   left Kan extension of $F$ along $\cK(A) \to \cD(A)$}.\cite[
     \href{https://kerodon.net/tag/0300}{Tag 0300}
@@ -596,7 +596,37 @@ Let us note that we can also have co-localizing situation.
 \end{proof}
 Now, given Grothendieck abelian $A$ with enough projectives,
 we can always take left and right derived functors!
-
+In this case, we have the following adjunction for any
+stable $\infty$-category $\cE$ : 
+\begin{cd}
+  {\mathcal{P}} \\
+	{\mathcal{D}(A)} & {\mathcal{K}(A)} & \rightsquigarrow & {\mathrm{Fun}_{\mathrm{ex}}(\mathcal{K}(A) , \mathcal{E})} & {\mathrm{Fun}_{\mathrm{ex}}(\mathcal{D}(A) , \mathcal{E})} \\
+	{\mathcal{I}}
+	\arrow["\sim"', from=1-1, to=2-1]
+	\arrow["p", shift left=2, from=1-1, to=2-2]
+	\arrow["\bot"{marking, allow upside down}, draw=none, from=1-1, to=2-2]
+	\arrow[shift left=2, from=2-2, to=1-1]
+	\arrow["\pi"{description}, from=2-2, to=2-1]
+	\arrow[shift right=2, from=2-2, to=3-1]
+	\arrow["{F \mapsto LF = F p}", shift left=5, from=2-4, to=2-5]
+	\arrow["{F \mapsto RF = Fi}"', shift right=5, from=2-4, to=2-5]
+	\arrow["\bot"{description}, shift left=3, draw=none, from=2-4, to=2-5]
+	\arrow["\bot"{description}, shift right=3, draw=none, from=2-4, to=2-5]
+	\arrow["{\pi^*}"{description}, from=2-5, to=2-4]
+	\arrow["\sim", from=3-1, to=2-1]
+	\arrow["i"', shift right=2, from=3-1, to=2-2]
+	\arrow["\bot"{marking, allow upside down}, draw=none, from=3-1, to=2-2]
+\end{cd}
+where \begin{enumerate}
+  \item we have \emph{two} incarnations of the derived stable $\infty$-category
+  $\pi : \cK(A) \to \cD(A)$.
+  Notice that $\cP$ and $\cI$ are \emph{not} equal as 
+  full subcategories of $\cK$.
+  \item taking left derived functors by composing with $K$-projective
+  replacement gives left adjoint to restricting functors along $\pi$.
+  \item taking right derived functors by composing with $K$-injective
+  replacement gives a right adjoint to restricting functors along $\pi$.
+\end{enumerate}
 It is possible to be in the Grothendieck abelian case,
 with a priori not enough projectives.
 However, if you happen to have specific bounded above
@@ -628,7 +658,7 @@ One can ask for the comparison of $RF$ to $F$ :
   and $F : A \to B$ a left exact additive functor of abelian categories.
   Let us assume we have a derived stable $\infty$-category of $B$.
   Then then there is an induced isomorphism $H^0(RF(X)) \to F(X)$.
-  
+
   Similarly for left derived functors and enough projectives.
 \end{prop}
 \begin{proof}

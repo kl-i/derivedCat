@@ -19,6 +19,36 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
+    \entry{KS06}{book}{}
+      \name{author}{2}{}{%
+        {{hash=b7bb8fb56d75656703f28621f0b6f412}{%
+           family={Kashiwara},
+           familyi={K\bibinitperiod},
+           given={Masaki},
+           giveni={M\bibinitperiod}}}%
+        {{hash=293299db3b6075e5092ae25eeea861ae}{%
+           family={Schapira},
+           familyi={S\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin, Heidelberg}%
+      }
+      \strng{namehash}{635bcffc280fb5c48749bcb90f36612a}
+      \strng{fullhash}{635bcffc280fb5c48749bcb90f36612a}
+      \strng{bibnamehash}{635bcffc280fb5c48749bcb90f36612a}
+      \strng{authorbibnamehash}{635bcffc280fb5c48749bcb90f36612a}
+      \strng{authornamehash}{635bcffc280fb5c48749bcb90f36612a}
+      \strng{authorfullhash}{635bcffc280fb5c48749bcb90f36612a}
+      \field{labelalpha}{KS06}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Categories and Sheaves}
+      \field{year}{2006}
+    \endentry
     \entry{lurie-HA}{unpublished}{}
       \name{author}{1}{}{%
         {{hash=760ea879284b1a6eeaad87a82be8d1d7}{%
@@ -67,31 +97,6 @@
       \field{howpublished}{\url{https://kerodon.net}}
       \field{title}{Kerodon}
       \field{year}{2025}
-    \endentry
-    \entry{KS06}{book}{}
-      \name{author}{1}{}{%
-        {{hash=75adf1b35befe2c03e0376332c223aa3}{%
-           family={Masaki\bibnamedelima Kashiwara},
-           familyi={M\bibinitperiod\bibinitdelim K\bibinitperiod},
-           given={Pierre\bibnamedelima Schapira},
-           giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Springer Berlin, Heidelberg}%
-      }
-      \strng{namehash}{75adf1b35befe2c03e0376332c223aa3}
-      \strng{fullhash}{75adf1b35befe2c03e0376332c223aa3}
-      \strng{bibnamehash}{75adf1b35befe2c03e0376332c223aa3}
-      \strng{authorbibnamehash}{75adf1b35befe2c03e0376332c223aa3}
-      \strng{authornamehash}{75adf1b35befe2c03e0376332c223aa3}
-      \strng{authorfullhash}{75adf1b35befe2c03e0376332c223aa3}
-      \field{labelalpha}{Mas06}
-      \field{sortinit}{M}
-      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Categories and Sheaves}
-      \field{year}{2006}
     \endentry
     \entry{stacks-project}{misc}{}
       \name{author}{1}{}{%
