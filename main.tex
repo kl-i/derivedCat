@@ -728,12 +728,17 @@ one can compute $\_ \otimes_A^L \_$ in $\cD(\MOD_A)$ for a commutative ring $A$
 using flat modules.
 We are also free to cook up any resolution as long as
 it is acyclic for the derived functor.
+Ultimately, this is the homological explanation for why Cech cohomology works.
 
-\textbf{TODO : If $W$ is co-localizing for $\cK(A)$
-and $A$ has $\_ \otimes \_$ lifting to $\mathrm{Tot}(\_ \otimes \_)$
-on $\cK(A)$,
-then showing say $\cP$ is closed under $\mathrm{Tot(\_ \otimes \_)}$
-should give symmetric monoidal structure on $\cD(A)$?}
+\textbf{TODO}
+\begin{enumerate}
+  \item Lifting adjunctions to derived adjunctions.
+  \item If $W$ is co-localizing for $\cK(A)$
+  and $A$ has $\_ \otimes \_$ lifting to $\mathrm{Tot}(\_ \otimes \_)$
+  on $\cK(A)$,
+  then showing say $\cP$ is closed under $\mathrm{Tot(\_ \otimes \_)}$
+  should give symmetric monoidal structure on $\cD(A)$?
+\end{enumerate}
 
 \section{The stable $\infty$-category of quasi-coherent sheaves for a scheme}
 
@@ -753,6 +758,7 @@ should give symmetric monoidal structure on $\cD(A)$?}
   Specifically, $(\QCOH\,X)^{\leq 0} := \LIM_{U} D^{\leq 0}(\MOD_{\cO(U)})$.
   \item Prove $(\QCOH \,X)^\heartsuit \simeq \LIM_{U} \MOD_{\cO(U)}$
   which is the usual definition of quasi-coherent sheaves.
+  Also prove $D((\QCOH \, X)^\heartsuit) \simeq \QCOH\, X$.
 \end{enumerate}
 
 \section{Cech cohomology and more generally flat base change}
